@@ -1,0 +1,17 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+	<form name = "addcourseform" action = 'addcourse' method = "post">
+        {% csrf_token %}
+		<center>
+			<table>
+		        <tr><td>Course name</td><td>:</td><td><input type = 'text' name = COURSENAME size="50"></td></tr>
+		        <tr><td>Type</td><td>:</td><td><input type = 'text' name = COURSETYPE size="50"></td></tr>
+			</table><br>
+			<input type = 'submit' value = 'ADD'>
+		</center>
+	</form>
+</body>
+</html>

@@ -1,0 +1,95 @@
+.dropbtn {
+    background-color:transparent;
+    color: white;
+    padding: 0px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #28395a;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: darkgrey}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color:transparent;}
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    
+  }
+  .centered h3{
+    
+    height: 40px;
+    padding: 5px;
+    background: linear-gradient(to left,  blue,green);
+    border-radius: 12px;
+  }
+  .centered h3 a{
+    
+    font-weight: 700;
+    font-size: 20px;
+  color: white;}
+  span{
+    text-transform: capitalize;
+  }
+  a{
+    text-transform: capitalize;
+  }
+  h1{
+    text-transform: capitalize;
+  }
+
+  
+
+
+.alert.success {background-color: #04AA6D; color: white;}
+.alert.info {background-color: #2196F3;}
+.alert.warning {background-color: #ff9800;}
+ 
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: black;
+  }
+ .appdata{
+
+ height: 60px;
+ color: #28395a
+  }

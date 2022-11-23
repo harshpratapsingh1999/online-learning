@@ -1,0 +1,418 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Courses</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/APISERO-logo.svg">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/css/slicknav.css">
+    <link rel="stylesheet" href="../static/css/flaticon.css">
+    <link rel="stylesheet" href="../static/css/progressbar_barfiller.css">
+    <link rel="stylesheet" href="../static/css/gijgo.css">
+    <link rel="stylesheet" href="../static/css/animate.min.css">
+    <link rel="stylesheet" href="../static/css/animated-headline.css">
+    <link rel="stylesheet" href="../static/css/magnific-popup.css">
+    <link rel="stylesheet" href="../static/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../static/css/themify-icons.css">
+    <link rel="stylesheet" href="../static/css/slick.css">
+    <link rel="stylesheet" href="../static/css/nice-select.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <!-- ? Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="../static/img/logo/loder.jpeg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <!-- Header Start -->
+    <div class="header-area header-transparent">
+        <div class="main-header ">
+            <div class="header-bottom  header-sticky">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo">
+                                <a href=""><img src="../static/img/APISERO-logo.svg" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="menu-wrapper d-flex align-items-center justify-content-end">
+                                <!-- Main-menu -->
+                                <div class="main-menu d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="{% url 'home' %}">Home</a></li>
+                                            <li class="active"><a href="">Courses</a></li>
+                                            <li><a href="{% url 'about' %}">About</a></li>
+                                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                                            <!-- Button -->
+                                            {% if session %}
+
+                                            <div class="dropdown">
+                                                <li class="dropbtn"><a>{{session.userinfo.nickname}}&nbsp;<i
+                                                            class="fa fa-user" aria-hidden="true"></i></a></li>
+                                                <div class="dropdown-content">
+                                                    <a href="{% url 'viewCourse' %}">My Courses</a>
+                                                    <a href="{% url 'profile' %}">Profile</a>
+                                                    <a href="{% url 'logout' %}" id="qsLogoutBtn">Logout</a>
+
+                                                </div>
+                                            </div>
+                                            {% endif %}
+
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+    <main>
+        <!--? slider Area Start-->
+        <section class="slider-area slider-area2">
+            <div class="slider-active">
+                <!-- Single Slider -->
+                <div class="single-slider slider-height2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-8 col-lg-11 col-md-12">
+                                <div class="hero__caption hero__caption2">
+                                    <h1 data-animation="bounceIn" data-delay="0.2s">Our courses</h1>
+                                    <!-- breadcrumb Start-->
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                                            <li class="breadcrumb-item"><a href="">Services</a></li>
+                                        </ol>
+                                    </nav>
+                                    <!-- breadcrumb End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Courses area start -->
+        <div class="courses-area section-padding40 fix">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2>Our featured courses</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="courses-actives">
+                    <!-- Single -->
+
+                    
+                    {% for key,val in coursedata.items %}
+                    <div class="properties pb-20">
+                        <div class="properties__card">
+                            
+                            <div class="properties__img overlay1">
+                                <img src="../static/img/gallery/feature.jpg" alt="">
+                                <div class="centered">
+                                        <h3><a >{{key}}</a></h3>
+                                </div>
+                            </div>
+                            
+                            <div class="properties__caption">
+                                <p>Technology</p>
+                                <form action="{% url 'course_detail' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{key}}" id="course_name" name="course_name"/>
+                                <h3><a>{{key}}</a></h3> 
+                                
+                                    <div class="card-body appdata" ><i class="fas fa-list" aria-hidden="true"></i>&nbsp;&nbsp;Flexible deadlines<br>
+                                       <p style="font-size: 12px;"> Reset deadlines in accordance to your schedule.</p>
+                                    </div>
+                                  
+                                    <div class="card-body appdata"><i class="fas fa-globe" aria-hidden="true"></i>&nbsp;&nbsp;100% online<br>
+                                       <p style="font-size: 12px;"> Start instantly and learn at your own schedule..</p>
+                                  </div>
+                                  <div class="card-body appdata"><i class="fas fa-clock" aria-hidden="true"></i>&nbsp;&nbsp;Approx. {{val.duration}} mins to complete   
+                                  </div>
+                                  
+                                  <hr>
+                                <div class="properties__footer d-flex justify-content-between align-items-center">
+                                    <div class="restaurant-name">
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half"></i>
+                                        </div>
+                                        <p><span>(4.5)</span> based on 120</p>
+                                    </div>
+                                    {% for i,j in data.items %}
+                                    {% if val.course_id_id == i%}
+                                    {% if j == 'paid' %}
+                                    <div class="price">
+                                        <span name="amount"><strong><i class="fas fa-rupee-sign" aria-hidden="true"></i>&nbsp;&nbsp;{{val.course_cost}}</strong></span>
+                                    </div>
+                                    {% else %}
+                                    <div class="price">
+                                        <input type="hidden" value="{{j}}" id="course_type" name="course_type"/>
+                                        <span name="amount" >Free</span>
+                                    </div>
+                                    {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                                </div>
+                                <a onclick="this.parentElement.submit()" class="border-btn border-btn2">Find out more</a>
+                            </form>
+                            </div>
+                        
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Courses area End -->
+        <!--? top subjects Area Start -->
+        <div class="topic-area">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2>Explore top subjects</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-topic text-center mb-30">
+                            <div class="topic-img">
+                                <img src="../static/img/gallery/topic1.jpg" alt="">
+                                <div class="topic-content-box">
+                                    <div class="topic-content">
+                                        <h3><a href="#">Data Science</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-topic text-center mb-30">
+                            <div class="topic-img">
+                                <img src="../static/img/gallery/topic2.png" alt="" style="background-color: cadetblue;">
+                                <div class="topic-content-box">
+                                    <div class="topic-content">
+                                        <h3><a href="#">Machine Learning</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-topic text-center mb-30">
+                            <div class="topic-img">
+                                <img src="../static/img/gallery/topic3.png" alt="">
+                                <div class="topic-content-box">
+                                    <div class="topic-content">
+                                        <h3><a href="#">Business Analytics</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-topic text-center mb-30">
+                            <div class="topic-img">
+                                <img src="../static/img/gallery/topic4.png" alt="">
+                                <div class="topic-content-box">
+                                    <div class="topic-content">
+                                        <h3><a href="#">Virtual Reality</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <div class="row justify-content-center">
+                    <div class="col-xl-12">
+                        <div class="section-tittle text-center mt-20">
+                            <a href="" class="border-btn">View More Subjects</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- top subjects End -->
+
+    </main>
+    <footer>
+        <div class="footer-wrappper footer-bg">
+            <!-- Footer Start-->
+            <div class="footer-area footer-padding">
+                <div class="container">
+                    <div class="row justify-content-between">
+                        <div class="col-xl-4 col-lg-5 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="single-footer-caption mb-30">
+                                    <!-- logo -->
+                                    <div class="footer-logo mb-25">
+                                        <a href="index.html"><img src="../static/img/APISERO-logo.svg" alt=""></a>
+                                    </div>
+                                    <div class="footer-tittle">
+                                        <div class="footer-pera">
+                                            <p>Apisero is a MuleSoft Strategic and Salesforce Ridge Partner led by an
+                                                innovative team with more than 25+ years experience across the
+                                                integration space. </p>
+                                        </div>
+                                    </div>
+                                    <!-- social -->
+                                    <div class="footer-social">
+                                        <a href="#"><i class="fab fa-twitter"></i></a>
+                                        <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Our solutions</h4>
+                                    <ul>
+                                        <li><a href="#">MuleSoft</a></li>
+                                        <li><a href="#">Salesforce</a></li>
+                                        <li><a href="#">Snowflake</a></li>
+                                        <li><a href="#">Tableau</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Insights</h4>
+                                    <ul>
+                                        <li><a href="#">Success stories</a></li>
+                                        <li><a href="#">Webinars</a></li>
+                                        <li><a href="#">News + Events</a></li>
+                                        <li><a href="#">Blog</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Company</h4>
+                                    <ul>
+                                        <li><a href="#">About</a></li>
+                                        <li><a href="#">Recognition</a></li>
+                                        <li><a href="#">Our team</a></li>
+                                        <li><a href="#">Locations</a></li>
+                                        <li><a href="#">Our customers</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- footer-bottom area -->
+            <div class="footer-bottom-area">
+                <div class="container">
+                    <div class="footer-border">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-xl-12 ">
+                                <div class="footer-copy-right text-center">
+                                    <p>
+                                        Copyright &copy;
+                                        <script>document.write(new Date().getFullYear());</script> &nbsp;by Apisero</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End-->
+        </div>
+    </footer>
+    <!-- Scroll Up -->
+    <div id="back-top">
+        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
+
+    <!-- JS here -->
+    <script src="./../static/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="./../static/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./../static/js/popper.min.js"></script>
+    <script src="./../static/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="./../static/js/jquery.slicknav.min.js"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="./../static/js/owl.carousel.min.js"></script>
+    <script src="./../static/js/slick.min.js"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="./../static/js/wow.min.js"></script>
+    <script src="./../static/js/animated.headline.js"></script>
+    <script src="./../static/js/jquery.magnific-popup.js"></script>
+
+    <!-- Date Picker -->
+    <script src="./../static/js/gijgo.min.js"></script>
+    <!-- Nice-select, sticky -->
+    <script src="./../static/js/jquery.nice-select.min.js"></script>
+    <script src="./../static/js/jquery.sticky.js"></script>
+    <!-- Progress -->
+    <script src="./../static/js/jquery.barfiller.js"></script>
+
+    <!-- counter , waypoint,Hover Direction -->
+    <script src="./../static/js/jquery.counterup.min.js"></script>
+    <script src="./../static/js/waypoints.min.js"></script>
+    <script src="./../static/js/jquery.countdown.min.js"></script>
+    <script src="./../static/js/hover-direction-snake.min.js"></script>
+
+    <!-- contact js -->
+    <script src="./../static/js/contact.js"></script>
+    <script src="./../static/js/jquery.form.js"></script>
+    <script src="./../static/js/jquery.validate.min.js"></script>
+    <script src="./../static/js/mail-script.js"></script>
+    <script src="./../static/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="./../static/js/plugins.js"></script>
+    <script src="./../static/js/main.js"></script>
+
+</body>
+
+</html>

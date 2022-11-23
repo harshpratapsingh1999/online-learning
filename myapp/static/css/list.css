@@ -1,0 +1,158 @@
+.sidenav {
+  height: 400px;
+  /* 100% Full-height */
+  width: 15%;
+  /* 0 width - change this with JavaScript */
+  /* position: fixed; Stay in place */
+  /* z-index: 1; Stay on top */
+  background-color: rgb(113, 0, 128);
+  /* Black*/
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
+  padding-top: 60px;
+  /* Place content 60px from the top */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.sidenav::-webkit-scrollbar {
+  display: none;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 5px 5px 8px 5px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+
+
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: darkorange;
+}
+
+/* Position and style the close button (top right corner) */
+
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+
+
+
+
+.video-container iframe {
+  width: 100%;
+  height: 400px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
+.checked {
+  color: #4CAF50;
+  display: inline-block;
+  transform: rotate(45deg);
+  height: var(--height);
+  width: var(--width);
+  border-bottom: var(--borderWidth) solid var(--borderColor);
+  border-right: var(--borderWidth) solid var(--borderColor);
+}
+
+.wrap-div a:hover {
+  color: darkorange !important;
+}
+
+.check {
+  display: inline-block;
+  transform: rotate(45deg);
+  height: var(--height);
+  width: var(--width);
+  border-bottom: var(--borderWidth) solid var(--borderColor);
+  border-right: var(--borderWidth) solid var(--borderColor);
+  color: #4CAF50;
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn1 {
+  background-color: #4CAF50;
+}
+
+/* Green */
+.btn2 {
+  background-color: #008CBA;
+}
+
+/* Blue */
+.col-sm-2 {
+  padding: 10px;
+  background-color: transparent;
+  border: 2px solid slategray;
+  margin: 20px;
+  height: 580px;
+  overflow-y: scroll;
+  box-shadow: 10px 10px;
+}
+
+@media screen and (max-width: 576px) {
+  .col-sm-2 {
+    max-width: 50%;
+  }
+}
+.title{
+  font-size: 20px;
+  padding: auto;
+  text-align: center;
+  font-weight: bold;
+  color: #10285d;
+}
+
+.css-uf5379 {
+  position: absolute;
+  top: 8px;
+  right: 0px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgb(31 31 31 / 50%) 0px 1px 6px 0px;
+  width: 650px;
+  height: 200px;
+  padding: 12px 24px 24px;
+  border-top: 8px solid #10285d;
+  display: flex;
+  flex-direction: row;
+  margin-right: 30px;
+  margin-top: 150px;
+  font-size: 15px;
+}

@@ -1,0 +1,226 @@
+<!--Code By Webdevtrick ( https://webdevtrick.com )-->
+<html lang="en">
+  <head>
+    <style>
+      *::after,
+      *::before {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 62.5%;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Open Sans",
+          sans-serif;
+        min-height: 100vh;
+      }
+      a,
+      a:link {
+        font-family: inherit;
+        text-decoration: none;
+      }
+      .container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+      .container:target {
+        display: flex;
+      }
+      .modal {
+        width: 60rem;
+        padding: 4rem 2rem;
+        border-radius: 0.8rem;
+        color: hsl(0, 0%, 100%);
+        background:#009fff ;
+        {% comment %} linear-gradient(to right bottom, #009fff, #ec2f4b) {% endcomment %}
+        box-shadow: 0.4rem 0.4rem 2.4rem 0.2rem hsla(236, 50%, 50%, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+      .details {
+        text-align: center;
+        margin-bottom: 4rem;
+        padding-bottom: 4rem;
+        border-bottom: 1px solid hsla(0, 0%, 100%, 0.4);
+      }
+      .title {
+        font-size: 3.2rem;
+      }
+      .description {
+        margin-top: 2rem;
+        font-size: 1.6rem;
+        font-style: italic;
+      }
+      .txt {
+        padding: 0 4rem;
+        margin-bottom: 4rem;
+        font-size: 1.6rem;
+        line-height: 2;
+      }
+      .txt::before {
+        content: "";
+        position: absolute;
+        top: 0%;
+        left: 100%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 18rem;
+        height: 18rem;
+        border: 1px solid hsla(0, 0%, 100%, 0.2);
+        border-radius: 100rem;
+        pointer-events: none;
+      }
+      .btn {
+        padding: 1rem 1.6rem;
+        border: 1px solid hsla(0, 0%, 100%, 0.4);
+        border-radius: 100rem;
+        color: inherit;
+        background: transparent;
+        font-size: 1.4rem;
+        font-family: inherit;
+        letter-spacing: 0.2rem;
+        transition: 0.2s;
+        cursor: pointer;
+      }
+      .btn:hover,
+      .btn:focus {
+        border-color: hsla(0, 0%, 100%, 0.6);
+        -webkit-transform: translateY(-0.2rem);
+        transform: translateY(-0.2rem);
+      }
+      .link-1 {
+        font-size: 1.8rem;
+        color: hsl(0, 0%, 100%);
+        background: linear-gradient(to right bottom, #009fff, #ec2f4b);
+        box-shadow: 0.4rem 0.4rem 2.4rem 0.2rem hsla(236, 50%, 50%, 0.3);
+        border-radius: 100rem;
+        padding: 1.4rem 3.2rem;
+        transition: 0.2s;
+      }
+      .link-1:hover,
+      .link-1:focus {
+        -webkit-transform: translateY(-0.2rem);
+        transform: translateY(-0.2rem);
+        box-shadow: 0 0 4.4rem 0.2rem hsla(236, 50%, 50%, 0.4);
+      }
+      .link-2 {
+        width: 4rem;
+        height: 4rem;
+        border: 1px solid hsla(0, 0%, 100%, 0.4);
+        border-radius: 100rem;
+        color: inherit;
+        font-size: 2.2rem;
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        transition: 0.2s;
+      }
+      .link-2::before {
+        content: "×";
+        -webkit-transform: translateY(-0.1rem);
+        transform: translateY(-0.1rem);
+      }
+      .link-2:hover,
+      .link-2:focus {
+        border-color: hsla(0, 0%, 100%, 0.6);
+        -webkit-transform: translateY(-0.2rem);
+        transform: translateY(-0.2rem);
+      }
+
+
+      input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      input[type=submit]:hover {
+        background-color: #45a049;
+      }
+
+      div {
+        border-radius: 5px;
+
+        padding: 20px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <title>Pure CSS Modal Card | Webdevtrick.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <a href="#modal-opened" class="link-1" id="modal-closed">Open Modal</a>
+
+    <div class="container" id="modal-opened">
+      <div class="modal">
+        <div class="details">
+          <h1 class="title">Course Title</h1>
+          <p class="description">Instructor Name or Course Details</p>
+        </div>
+
+        <div>
+          <form action="/action_page.php">
+            <label for="fname">Course Name</label>
+            <input
+              type="text"
+              id="fname"
+              name="firstname"
+              placeholder="Course Name.."
+            />
+
+            <label for="lname">Instructor Name</label>
+            <input
+              type="text"
+              id="lname"
+              name="lastname"
+              placeholder="Instructor Name.."
+            />
+
+            <label for="country">Country</label>
+            <select id="country" name="country">
+              <option value="australia">Australia</option>
+              <option value="canada">Canada</option>
+              <option value="usa">USA</option>
+            </select>
+
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
+        <a href="#modal-closed" class="link-2"></a>
+      </div>
+    </div>
+  </body>
+</html>

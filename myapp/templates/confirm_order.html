@@ -1,0 +1,128 @@
+{% if session %}
+{% if status %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class='container'>
+    <div class='row' style='padding-top:25px; padding-bottom:25px;'>
+        <div class='col-md-12'>
+            <div id='mainContentWrapper'>
+                <div class="col-md-8 col-md-offset-2">
+                    <h2 style="text-align: center;">
+                        Review Your Order & Complete Checkout
+                    </h2>
+                    <hr />
+                    <div class="shopping_cart">
+                        <form class="form-horizontal" role="form" action="" method="post" id="payment-form">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <span>Review Your Order</span>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <div class="items">
+                                                <div class="col-md-9">
+                                                    <table class="table table-striped">
+                                                        <tr>
+                                                            <td colspan="2"><b>Receipt</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <ul>
+                                                                    <li>Original price:</li>
+                                                                </ul>
+                                                            </td>
+                                                            <td><b>₹{{ total }}</b></td>
+                                                        </tr>
+                                                        <tr><td>
+                                                            <ul>
+                                                                <li>Coupon discounts:</li>
+                                                            </ul></td>
+                                                            <td><b>-₹{{ coupon }}</b></td>
+                                                        </tr>
+                                                        <tr><td>
+                                                            <ul>
+                                                                <li>Total: </li>
+                                                            </ul></td>
+                                                            <td><b>₹{{ damount }}</b></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div style="text-align: center;">
+                                                        <h3>Order Total</h3>
+                                                        <h3><span style="color:green;">₹{{ damount }}</span></h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <form method="POST" action="{% url 'payment_status' %}" >
+                                {% csrf_token %}
+                                
+                                <button class="btn" id="pay-btn" onclick="myFunction()">Pay with Razorpay</button>
+                                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                                <script>
+                                    
+                                
+                                    var options = {
+                                    key: "{{ key }}",
+                                    amount: "{{ amount }}", 
+                                    currency: "INR",
+                                    name: "{{order.name}}",
+                                    description: "Learning Management System",
+                                    
+                                    order_id: "{{ order_id }}",
+                                    callback_url: "{{ callback_url }}",
+                                    redirect: true,
+                                    prefill: {
+                                        "name": "Gaurav Kumar",
+                                        "email": "gaurav.kumar@example.com",
+                                        "contact": "9999999999"
+                                    },
+                                    
+                                    
+                                };
+                                
+                                    var rzp1 = new Razorpay(options);
+                                    
+                                 
+                                  // add event listener to the payment button.
+                                document.getElementById("pay-btn").onclick = function (e) {
+                                rzp1.open();
+                                e.preventDefault();
+                                }
+
+                                </script>
+                                
+                            </form>
+                                
+                            <br />
+                            <div style="text-align: left;"><br />
+                                By submiting this order you are agreeing to our <a href="#">apisero lms
+                                    billing agreement</a>, and <a href="#">terms of service</a>.
+                                If you have any questions about our products or services please contact us
+                                before placing this order.
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+{% endif %}
+{% else %}
+<p>Sorry you're not authorized</p>
+<script>window.location.href = "{% url 'login' %}"</script> 
+{% endif %}

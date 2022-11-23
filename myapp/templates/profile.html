@@ -1,0 +1,113 @@
+{% if session %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+ 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+     profile
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <!-- CSS Files -->
+  <link href="../static/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../static/css/paper-kit.css" rel="stylesheet" />
+  <link href="../static/css/rowcards.css" rel="stylesheet"/>
+  <link href="../static/css/profile.css" rel="stylesheet"/>
+</head>
+
+<body>
+    <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('../static/img/profile/fabio-mangione.jpg');">
+        <div class="filter"></div>
+    </div>
+    <form method="post" action="{% url 'editProfile' %}">
+        {% csrf_token %}
+      <div class="section profile-content">
+        <div class="container">
+          <div class="owner">
+            <div class="avatar">
+              <img src="{{session.userinfo.picture}}" alt="Circle Image" id="image" class="img-circle img-no-padding img-responsive">
+            </div>
+            <input type="file" name="photo" class="btn" id="photo"/>
+            <input type="button" class="btn" value="Add" onclick="onAddPhoto()" id="add"/>
+            <div class="name">
+              <input type="text" size="50" name="username" class="title" value="{{session.userinfo.nickname}}" disabled>
+              <input type="text" size="50" name="occupation" class="description" value="SSD" disabled>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 ml-auto mr-auto text-center">
+               <btn class="btn btn-outline-default btn-round" onclick="onEdit()"><i class="fa fa-cog" ></i>Settings</btn>
+            </div>
+          </div>
+          <br/>
+          <div class="info-container">
+            <div class="cards">
+                <h2 class="title center">
+                    About me
+                </h2>
+                <div class="divider"></div>
+                <div class="info-box-container">
+                    <div class="info-box">
+                        <div class="info-row row">
+                            <label class="label" for="Email">Email</label><br>
+                            <input type="email" id="Email" name="Email" size="50"  value="{{session.userinfo.email}}" disabled><br>
+                        </div>
+                        <div class="info-row row">
+                            <label class="label" for="phone">Phone</label><br>
+                            <input type="text" id="phone" name="phone" size="50" pattern="[0-9]{10}" value="{{6388096129}}" disabled>
+                        </div>
+                        <div class="info-row row">
+                            <label class="label" for="age">Age</label><br>
+                            <input type="number" id="age" name="age" size="50" value="23" disabled>
+                        </div>
+                        <div class="info-row row">
+                            <label class="label" for="address">Address</label><br>
+                            <textarea type="text" id="address" name="address" rows="4" cols="50" disabled>Gorakhpur, uttar pradesh</textarea>
+                        </div>                            
+                        <div class="info-row row">
+                            <label class="label" for="employment">Employment</label><br>
+                            <input type="text" id="employment" name="employment" size="50" value="Unemployed" disabled>
+                        </div>                            
+                        <div class="info-row row">
+                            <label class="label" for="education">Education</label><br>
+                            <input type="text" id="education" name="education" size="50" value="BE" disabled>
+                        </div>                            
+                        <div class="info-row row">
+                            <label class="label" for="Experience">Experience</label><br>
+                            <input type="number" id="Experience" name="Experience" size="50" value="1.2" disabled>
+                        </div>                            
+                        <div class="info-row row">
+                            <label class="label" for="skillset">Skillset</label><br>
+                            <input type="text" id="skillset" name="skillset" size="50" value="java, c++" disabled>
+                        </div>
+                        <div class="info-row row">
+                            <label class="label" for="created_date">Created Date</label><br>
+                            <input type="date" id="created_date" name="created_date" size="50" value="2020-09-12" disabled>
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <div class="btn-container" id="btnDiv">
+            <input type="button" class="btn cancel" value="Cancel" onclick="onCan()">
+            <input class="btn" type="submit" value="Save Changes" >
+        </div>
+        </div>
+    </div>
+    </form>
+    <script src="../static/js/profile.js"></script>
+
+</body>
+</html>
+{% else %}
+<p>Sorry you're not authorized</p>
+<script>window.location.href = "{% url 'login' %}"</script> 
+{% endif %}   
